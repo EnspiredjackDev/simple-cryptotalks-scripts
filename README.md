@@ -15,6 +15,15 @@ Gets and lists all the models available in an html file that saves to the same d
 
 No authentication required.
 
+## create_user.py
+Creates an account using an email and password.
+
+**Authentication required:**  
+`email`  
+`password`  
+`confirm_password`  
+Replace `your_email_here`, `your_password_here` in the file with your correct credentials.  
+
 ## generate_token.py
 Generates a new token using your username and password.  
 
