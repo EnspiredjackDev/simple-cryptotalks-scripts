@@ -1,4 +1,5 @@
 import requests
+import markdown2
 
 def get_models(url):
     response = requests.get(url)
@@ -31,7 +32,7 @@ def generate_html(models):
 </html>
 """
     models_html = "".join([
-        f"<div class='model'><div class='model-header'>{model['name']}</div><div class='model-desc'>{model['description']}</div></div>"
+        f"<div class='model'><div class='model-header'>{model['name']}</div><div class='model-desc'>{markdown2.markdown(model['description'])}</div></div>"
         for model in models
     ])
     return html_template.format(models_html=models_html)
