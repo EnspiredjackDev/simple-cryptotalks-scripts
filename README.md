@@ -2,6 +2,14 @@
 These are some simple command line python scripts for use on [cryptotalks.ai](https://cryptotalks.ai/).  
 Nothing fancy, just a script for every endpoint (except chat/completions) 
 
+## walk_through.py
+Step-by-step walkthrough cli tool of all the files in this repo - cli menu and all. (I think I got carried away with this one)  
+
+**Requirements:**  
+`pip install markdown2`  
+
+All types of authentication in but not necessarily required.  
+
 ## listmodels.py
 Gets and lists all the models available in the command line.
 
