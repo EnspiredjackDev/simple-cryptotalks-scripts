@@ -1,0 +1,41 @@
+<mat-accordion>
+  <mat-expansion-panel class="header">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Chat Settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="api-key-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter API Key</mat-label>
+        <input matInput [(ngModel)]="apiKey" (blur)="setApiKey()">
+      </mat-form-field>
+    </div>
+
+    <div class="model-select-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Select a Model</mat-label>
+        <mat-select [(value)]="modelName" (selectionChange)="setModelName()">
+          <mat-option *ngFor="let model of models" [value]="model.id">{{ model.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<div class="chat-container">
+  <div class="chat-window">
+    <div *ngFor="let message of messages" [ngClass]="{'user': message.role === 'user', 'assistant': message.role === 'assistant', 'message': true}">
+      <div markdown [data]="message.content"></div>
+    </div>
+  </div>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Type your message</mat-label>
+    <input matInput [(ngModel)]="userMessage" (keyup.enter)="sendMessage()">
+  </mat-form-field>
+</div>
+<button (click)="resetChat()">Reset Chat</button>

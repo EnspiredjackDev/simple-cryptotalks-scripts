@@ -2,6 +2,23 @@
 These are some simple command line python scripts for use on [cryptotalks.ai](https://cryptotalks.ai/).  
 Nothing fancy, just a script for every endpoint (except chat/completions) 
 
+## webapp/
+Webapplication front and backend for using the API to chat with models (unfinished)
+
+#### webapp.py
+Webapp backend, run with `python3 ./webapp.py` in the terminal.  
+
+**Requirements:**  
+`pip install flask flask_cors openai`
+
+#### Angular frontend
+Webapp frontend, not meant for production, not like any of the other things here really are.  
+Run with `ng serve` in the terminal in the `./webapp/chat-frontend/` directory.  
+
+**Requirements:**  
+Node V18+  
+Run `npm install` in the `./webapp/chat-frontend/` directory.
+
 ## walk_through.py
 Step-by-step walkthrough cli tool of all the files in this repo - cli menu and all. (I think I got carried away with this one)  
 

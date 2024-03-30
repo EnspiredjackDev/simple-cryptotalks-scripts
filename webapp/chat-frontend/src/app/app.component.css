@@ -1,0 +1,83 @@
+/* Chat window styling */
+/* Container for the chat application */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 80vh; 
+    width: 80vw;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Chat window adjustments */
+  .chat-window {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background-color: #393c3f;
+    color: #ecf0f1;
+    padding: 20px;
+    height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+  
+  
+  /* Message bubble styling */
+  .message {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+    word-wrap: break-word;
+  }
+  
+  .user {
+    align-self: flex-end;
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .assistant {
+    align-self: flex-start;
+    background-color: #535c65;
+    color: #ffffff;
+  }
+  
+  /* Input field styling - using Angular Material classes for consistency */
+  mat-form-field {
+    width: 100%;
+    color: #ecf0f1;
+  }
+  
+  input.mat-input-element {
+    color: #ecf0f1;
+  }
+  
+  /* Override Angular Material Form Field Underline & Placeholder */
+  .mat-form-field-underline, .mat-form-field-ripple {
+    background-color: #95a5a6;
+  }
+  
+  .mat-form-field-label {
+    color: #bdc3c7 !important;
+  }
+  
+  .api-key-container {
+    margin: 20px auto;
+    width: 80%;
+  }
+
+  .model-select-container {
+    margin: 20px auto;
+    width: 80%;
+  }
+
+  .header {
+    margin-bottom: 20px; 
+    width: 80vw; 
+    margin: auto; 
+  }
