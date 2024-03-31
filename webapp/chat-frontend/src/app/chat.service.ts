@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class ChatService {
 
-  private apiUrl = 'http://localhost:5000'; // Adjust if your Flask API is hosted elsewhere
+  private apiUrl = 'http://localhost:5000';
   private apiKey: string = "";
   private modelName: string = 'mistralai/mistral-7b-instruct:free';
   private sessionId: string;
@@ -40,7 +40,13 @@ export class ChatService {
   }
 
   fetchModels(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/models');  // Adjust the URL if your Flask app is hosted elsewhere
+    return this.http.get<any[]>(this.apiUrl + '/models'); 
   }
+
+  fetchModelDetails(modelId: string): Observable<any> {
+    return this.http.get(this.apiUrl + `/model-details?modelId=${encodeURIComponent(modelId)}`);
+  }
+  
+  
 
 }

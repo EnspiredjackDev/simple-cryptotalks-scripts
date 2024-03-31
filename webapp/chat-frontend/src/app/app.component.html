@@ -20,8 +20,14 @@
           <mat-option *ngFor="let model of models" [value]="model.id">{{ model.name }}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button mat-raised-button color="accent" (click)="openModelDetails()">Model Details</button>
+
+      <div class="usage-info-container">
+        <mat-checkbox [(ngModel)]="showUsageInfo" (change)="toggleUsageVisibility()">Show Usage Information</mat-checkbox>
+      </div>
     </div>
 
+    
   </mat-expansion-panel>
 </mat-accordion>
 
@@ -37,5 +43,10 @@
     <mat-label>Type your message</mat-label>
     <input matInput [(ngModel)]="userMessage" (keyup.enter)="sendMessage()">
   </mat-form-field>
+  <div *ngIf="showUsageInfo">
+    <p style="color: white;">Total Tokens Used: {{ totalTokensUsed }} | Total Cost: ${{ totalCost }}</p>
+  </div>
+  <button mat-raised-button color="accent" (click)="resetChat()">Reset Chat</button>
 </div>
-<button (click)="resetChat()">Reset Chat</button>
+
+

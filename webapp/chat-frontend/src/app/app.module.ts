@@ -15,10 +15,16 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CookieService } from 'ngx-cookie-service';
 import { MarkdownModule } from 'ngx-markdown';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ModelDetailsDialogComponent } from './components/model-details-dialog/model-details-dialog.component'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModelDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,11 @@ import { MarkdownModule } from 'ngx-markdown';
     MatSlideToggleModule,
     MatSelectModule,
     MatExpansionModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync(),

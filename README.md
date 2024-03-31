@@ -1,6 +1,6 @@
 # simple-cryptotalks-scripts
 These are some simple command line python scripts for use on [cryptotalks.ai](https://cryptotalks.ai/).  
-Nothing fancy, just a script for every endpoint (except chat/completions) 
+Nothing fancy, just a script for every endpoint. - Well and a little webapp now  
 
 ## webapp/
 Webapplication front and backend for using the API to chat with models (unfinished)

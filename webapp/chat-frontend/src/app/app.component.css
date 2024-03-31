@@ -80,4 +80,9 @@
     margin-bottom: 20px; 
     width: 80vw; 
     margin: auto; 
+    margin-top: 10px;
+  }
+
+  .usage-info-container {
+    margin-top: 10px;
   }

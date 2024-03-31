@@ -42,7 +42,15 @@ def chat_with_openai(api_key, model_name, messages):
         model=model_name,  
         messages=messages,
     )
-    return completion.choices[0].message.content
+    total_tokens_used = completion.usage.total_tokens
+    total_cost = completion.usage.model_extra['total_cost']
+    message_content = completion.choices[0].message.content
+
+    return {
+        'message_content': message_content,
+        'total_tokens_used': total_tokens_used,
+        'total_cost': total_cost
+    }
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -62,22 +70,64 @@ def chat():
     messages = get_conversation_history(session_id)
     messages.append({"role": "user", "content": user_message})
 
-    response = chat_with_openai(api_key, model_name, messages)
+    chat_response = chat_with_openai(api_key, model_name, messages)
+    message_content = chat_response['message_content']
+    
     # Store new messages
     add_message_to_db(session_id, "user", user_message)
-    add_message_to_db(session_id, "assistant", response)
+    add_message_to_db(session_id, "assistant", message_content)
 
-    return jsonify({'response': response})
+    # Return the message content along with total tokens used and total cost
+    return jsonify({
+        'response': message_content,
+        'total_tokens_used': chat_response['total_tokens_used'],
+        'total_cost': chat_response['total_cost']
+    })
 
 @app.route('/models', methods=['GET'])
 def get_models():
     response = requests.get('https://cryptotalks.ai/v1/models/')
     if response.status_code == 200:
-        models = response.json().get('data', [])
-        return jsonify(models)
+        models_data = response.json().get('data', [])
+        
+        # Transform the models_data to include both model names and their IDs
+        model_details = [{'name': model.get('name'), 'id': model.get('id')} for model in models_data]
+        
+        return jsonify(model_details)
+    else:
+        return jsonify({'error': 'Failed to fetch models'}), 500
+
+
+@app.route('/model-details', methods=['GET'])
+def get_model_details():
+    model_id = request.args.get('modelId', '')
+    response = requests.get('https://cryptotalks.ai/v1/models/')
+    if response.status_code == 200:
+        models_data = response.json().get('data', [])
+        
+        # Find the specific model by ID
+        model_detail = next((model for model in models_data if model.get('id') == model_id), None)
+        
+        if model_detail is not None:
+            pricing_info = model_detail.get('pricing', {})
+            adjusted_pricing = {}
+            for key, value in pricing_info.items():
+                if key in ['prompt', 'completion'] and isinstance(value, (float, int)):
+                    # Adjust the pricing to per 1000 tokens for prompt and completion
+                    adjusted_pricing[key] = round(value * 1000, 4)
+                elif key == 'image':
+                    # Leave the image pricing as is
+                    adjusted_pricing[key] = value
+            
+            model_detail['pricing'] = adjusted_pricing  # Replace pricing with adjusted pricing
+            
+            return jsonify(model_detail)
+        else:
+            return jsonify({'error': 'Model not found'}), 404
     else:
         return jsonify({'error': 'Failed to fetch models'}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
     setup_database()
+    app.run(debug=True)
+    

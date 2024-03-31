@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ data.name }}</h2>
+<mat-dialog-content>
+  <p markdown><strong>Description:</strong> {{ data.description }}</p>
+  <p><strong>Prompt Pricing:</strong> {{ data.pricing.prompt }} (per 1000 tokens)</p>
+  <p><strong>Completion Pricing:</strong> {{ data.pricing.completion }} (per 1000 tokens)</p>
+  <p *ngIf="data.pricing.image != 0"><strong>Image Pricing:</strong> {{ data.pricing.image }} (per Image)</p>
+  <p><strong>Context Length:</strong> {{ data.context_length | number }}</p>
+  <p><strong>Max Completion Tokens:</strong> {{ data.top_provider.max_completion_tokens | number }}</p>
+  <p><strong>Moderated:</strong> {{ data.top_provider.is_moderated }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
